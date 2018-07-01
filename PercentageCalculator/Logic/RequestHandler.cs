@@ -3,8 +3,15 @@ using PercentageCalculator.Models.Response;
 
 namespace PercentageCalculator.Logic
 {
-    public class RequestHandler
+    public class RequestHandler : IRequestHandler
     {
+        private PercentageRounder _percentageRounder;
+
+        public RequestHandler(PercentageRounder percentageRounder)
+        {
+            _percentageRounder = percentageRounder;
+        }
+
         public Root Execute(Models.Request.Root input)
         {
             var valueSum = input.Data.Sum(x => x.Value);
