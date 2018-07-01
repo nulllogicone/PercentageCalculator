@@ -13,8 +13,8 @@ namespace PercentageCalculator.Models
 
         public int Index { get; set; }
 
-        public int Value { get; set; }
-
         public decimal Remainder { get; set; }
+
+        public int Value { get; set; }
     }
 }

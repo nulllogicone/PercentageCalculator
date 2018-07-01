@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace PercentageCalculator.Models.Request
+﻿namespace PercentageCalculator.Models.Request
 {
     public class Data
     {
