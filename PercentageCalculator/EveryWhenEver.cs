@@ -4,13 +4,13 @@ using Microsoft.Azure.WebJobs.Host;
 
 namespace PercentageCalculator
 {
-    public static class EveryWhenEver
-    {
-        [FunctionName("EveryWhenEver")]
-        public static void Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer, TraceWriter log)
-        {
-            log.Info($"C# Timer trigger function executed at: {DateTime.Now}");
+    //public static class EveryWhenEver
+    //{
+    //    [FunctionName("EveryWhenEver")]
+    //    public static void Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer, TraceWriter log)
+    //    {
+    //        log.Info($"C# Timer trigger function executed at: {DateTime.Now}");
 
-        }
-    }
+    //    }
+    //}
 }
