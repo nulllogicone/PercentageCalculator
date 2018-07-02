@@ -1,50 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
+﻿using Xunit;
 
 namespace PercentageCalculator.Tests.Logic.TestData
 {
     public class PercentageRounderTestData
     {
-        public static TheoryData<decimal[], int[]> RoundedPercentagesAddUpTo99 =
-                new TheoryData<decimal[], int[]>
-                {
-                        {
-                                new[]
-                                {
-                                        33.334m,
-                                        33.333m,
-                                        33.333m,
-                                },
-                                new[]
-                                {
-                                        34,
-                                        33,
-                                        33
-                                }
-                        },
-                        {
-                                // 15/14/17/30
-                                new[]
-                                {
-                                        19.7368m,
-                                        18.421m,
-                                        22.3684m,
-                                        39.4736m
-                                },
-                                new[]
-                                {
-                                        20,
-                                        18,
-                                        22,
-                                        40
-                                }
-                        }
-                };
-
         public static TheoryData<decimal[], int[]> RoundedPercentagesAddUpTo100 =
                 new TheoryData<decimal[], int[]>
                 {
@@ -53,7 +12,7 @@ namespace PercentageCalculator.Tests.Logic.TestData
                                 {
                                         33m,
                                         33m,
-                                        34m,
+                                        34m
                                 },
                                 new[]
                                 {
@@ -63,7 +22,7 @@ namespace PercentageCalculator.Tests.Logic.TestData
                                 }
                         },
                         {
-                                // 15/19/18/30
+                                // input values: 15, 19, 18, 30
                                 new[]
                                 {
                                         18.2926m,
@@ -89,7 +48,7 @@ namespace PercentageCalculator.Tests.Logic.TestData
                                 {
                                         34.7m,
                                         44.7m,
-                                        20.6m,
+                                        20.6m
                                 },
                                 new[]
                                 {
@@ -99,7 +58,7 @@ namespace PercentageCalculator.Tests.Logic.TestData
                                 }
                         },
                         {
-                                // 11/13/16/13
+                                // input values: 11, 13, 16, 13
                                 new[]
                                 {
                                         20.7547m,
@@ -117,5 +76,40 @@ namespace PercentageCalculator.Tests.Logic.TestData
                         }
                 };
 
+        public static TheoryData<decimal[], int[]> RoundedPercentagesAddUpTo99 =
+                new TheoryData<decimal[], int[]>
+                {
+                        {
+                                new[]
+                                {
+                                        33.334m,
+                                        33.333m,
+                                        33.333m
+                                },
+                                new[]
+                                {
+                                        34,
+                                        33,
+                                        33
+                                }
+                        },
+                        {
+                                // input values: 15, 14, 17, 30
+                                new[]
+                                {
+                                        19.7368m,
+                                        18.421m,
+                                        22.3684m,
+                                        39.4736m
+                                },
+                                new[]
+                                {
+                                        20,
+                                        18,
+                                        22,
+                                        40
+                                }
+                        }
+                };
     }
 }
