@@ -5,7 +5,7 @@ namespace PercentageCalculator.Logic
 {
     public class RequestHandler : IRequestHandler
     {
-        private PercentageRounder _percentageRounder;
+        private readonly PercentageRounder _percentageRounder;
 
         public RequestHandler(PercentageRounder percentageRounder)
         {
@@ -18,7 +18,7 @@ namespace PercentageCalculator.Logic
 
             var rawPercentages = input.Data.Select(x => (decimal) x.Value / valueSum * 100).ToList();
 
-            var roundedPercentages = new PercentageRounder().Execute(rawPercentages);
+            var roundedPercentages = _percentageRounder.Execute(rawPercentages);
             var response = new Root();
             for (var i = 0; i < roundedPercentages.Count; i++)
             {
