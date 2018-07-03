@@ -25,7 +25,11 @@ namespace PercentageCalculator
             var requestBody = new StreamReader(req.Body).ReadToEnd();
             var requestRoot = JsonConvert.DeserializeObject<Models.Request.Root>(requestBody);
 
-            var response = new RequestHandler().Execute(requestRoot);
+            // Move this to a DI container
+            var percentageRounder = new PercentageRounder();
+            var requestHandler = new RequestHandler(percentageRounder);
+
+            var response = requestHandler.Execute(requestRoot);
 
             await LogRequestAsync(percentageCalculationInputTable, requestBody, response);
 

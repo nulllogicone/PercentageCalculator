@@ -5,7 +5,7 @@ using PercentageCalculator.Models;
 
 namespace PercentageCalculator.Logic
 {
-    public class PercentageRounder
+    public class PercentageRounder : IPercentageRounder
     {
         public List<int> Execute(ICollection<decimal> rawPercentages)
         {
@@ -22,7 +22,7 @@ namespace PercentageCalculator.Logic
                                   .ToList();
         }
 
-        private static void AdjustPercentageInfos(int total, List<PercentageInfo> percentageInfos)
+        private static void AdjustPercentageInfos(int total, IReadOnlyCollection<PercentageInfo> percentageInfos)
         {
             var remainder = total - percentageInfos.Sum(p => p.Value);
             foreach (var percentageInfo in percentageInfos)
