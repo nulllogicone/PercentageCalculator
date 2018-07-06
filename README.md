@@ -1,22 +1,24 @@
 # PercentageCalculator
 
-Do some magic with int arrays
+Take an array of integer values and return the percentage that sums up to 100
 
-```
+[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
+
+```json
 {
-	"values": [
-	{
-		"label": "red",
-		"value": 30
-	},
-	{
-		"label": "green",
-		"value": 20
-	},
-	{
-		"label": "blue",
-		"value": 250
-	},
-	]
+  "data": [
+  {
+    "text": "red",
+    "value": 30
+  },
+  {
+    "text": "green",
+    "value": 20
+  },
+  {
+    "text": "blue",
+    "value": 150
+  },
+  ]
 }
 ```
