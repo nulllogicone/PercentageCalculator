@@ -8,10 +8,16 @@
         "description": "The name of the function app that you wish to create."
       }
     },
-    "storageAccountName": {
+    "storageAccountType": {
       "type": "string",
+      "defaultValue": "Standard_LRS",
+      "allowedValues": [
+        "Standard_LRS",
+        "Standard_GRS",
+        "Standard_RAGRS"
+      ],
       "metadata": {
-        "description": "The name of an existing storage account"
+        "description": "Storage Account type"
       }
     },
     "location": {
@@ -39,10 +45,20 @@
   "variables": {
     "functionAppName": "[parameters('appName')]",
     "hostingPlanName": "[parameters('appName')]",
-    "storageAccountName": "[parameters('storageAccountName')]",
+    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'azfunctions')]",
     "storageAccountid": "[concat(resourceGroup().id,'/providers/','Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]"
   },
   "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[variables('storageAccountName')]",
+      "apiVersion": "2016-12-01",
+      "location": "[parameters('location')]",
+      "kind": "Storage",
+      "sku": {
+        "name": "[parameters('storageAccountType')]"
+      }
+    },
     {
       "type": "Microsoft.Web/serverfarms",
       "apiVersion": "2015-04-01",
@@ -65,6 +81,7 @@
       "kind": "functionapp",
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]",
         "[resourceId('microsoft.insights/components', variables('functionAppName'))]"
       ],
       "tags": {
