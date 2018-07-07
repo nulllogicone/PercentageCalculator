@@ -8,7 +8,6 @@ using NSubstitute;
 using PercentageCalculator.Logic;
 using PercentageCalculator.Tests.Logic.TestData;
 using Xunit;
-
 using RequestData = PercentageCalculator.Models.Request.Data;
 using RequestRoot = PercentageCalculator.Models.Request.Root;
 using ResponseRoot = PercentageCalculator.Models.Response.Root;
@@ -20,7 +19,7 @@ namespace PercentageCalculator.Tests.Logic
     {
         [Theory]
         [MemberData(nameof(RequestHandlerTestData.RequestsRoundedToIntegers), MemberType = typeof(RequestHandlerTestData))]
-        public void Execute_RequestsRoundedToIntegers_ResponseIsCorrect(RequestRoot request, List<int> roundedPercentages, PercentageCalculator.Models.Response.Root expectedResult)
+        public void Execute_RequestsRoundedToIntegers_ResponseIsCorrect(RequestRoot request, List<int> roundedPercentages, ResponseRoot expectedResult)
         {
             var percentageCalculator = Substitute.For<IPercentageRounder>();
             percentageCalculator.Execute(Arg.Any<ICollection<decimal>>()).Returns(roundedPercentages);
@@ -38,7 +37,7 @@ namespace PercentageCalculator.Tests.Logic
             var requestHandler = new RequestHandler(percentageRounder);
 
             var request = new RequestRoot
-            {
+                          {
                                   Decimals = 0,
                                   Data = dataList
                           };
@@ -46,6 +45,44 @@ namespace PercentageCalculator.Tests.Logic
             var result = requestHandler.Execute(request);
 
             result.Data.Sum(x => x.Percentage).Should().Be(100);
+        }
+
+        [Property]
+        public void Execute_Largest_Value_Has_The_Largest_Percentage(List<RequestData> dataList)
+        {
+            var percentageRounder = new PercentageRounder();
+            var requestHandler = new RequestHandler(percentageRounder);
+
+            var request = new RequestRoot
+                          {
+                                  Decimals = 0,
+                                  Data = dataList
+                          };
+
+            var result = requestHandler.Execute(request);
+
+            var dataWithLargestValue = result.Data.OrderByDescending(x => x.Value).First();
+            var dataWithLargestPercentage = result.Data.OrderByDescending(x => x.Percentage).First();
+
+            dataWithLargestValue.Should().Be(dataWithLargestPercentage);
+        }
+
+        [Property]
+        public void Execute_All_Percentage_Values_Are_Positive(List<RequestData> dataList)
+        {
+            var percentageRounder = new PercentageRounder();
+            var requestHandler = new RequestHandler(percentageRounder);
+
+            var request = new RequestRoot
+                          {
+                                  Decimals = 0,
+                                  Data = dataList
+                          };
+
+            var result = requestHandler.Execute(request);
+            var allPercentagesArePositive = result.Data.All(x => x.Percentage > 0);
+
+            allPercentagesArePositive.Should().BeTrue();
         }
 
         [Fact]

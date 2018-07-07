@@ -6,11 +6,11 @@ namespace PercentageCalculator.Tests.Logic.TestData
 {
     public static class Generators
     {
-        private const int ListCountLowerBound = 5;
-        private const int ListCountUpperBound = 7;
+        private const int ListCountLowerBound = 1;
+        private const int ListCountUpperBound = 10;
 
-        private const int ValueLowerBound = 100;
-        private const int ValueUpperBound = 150;
+        private const int ValueLowerBound = 1;
+        private const int ValueUpperBound = 1000;
 
         public static Arbitrary<List<Data>> DataList
         {
